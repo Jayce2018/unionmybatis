@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.winter.mapper.QuestionnaireMapper" >
+  <resultMap id="BaseResultMap" type="com.winter.model.Questionnaire" >
+    <id column="qnid" property="qnid" jdbcType="INTEGER" />
+    <result column="qnname" property="qnname" jdbcType="VARCHAR" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="createrid" property="createrid" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    qnid, qnname, typeid, createrid, createdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from questionnaire
+    where qnid = #{qnid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from questionnaire
+    where qnid = #{qnid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.winter.model.Questionnaire" >
+    insert into questionnaire (qnid, qnname, typeid, 
+      createrid, createdate)
+    values (#{qnid,jdbcType=INTEGER}, #{qnname,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, 
+      #{createrid,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.Questionnaire" >
+    insert into questionnaire
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qnid != null" >
+        qnid,
+      </if>
+      <if test="qnname != null" >
+        qnname,
+      </if>
+      <if test="typeid != null" >
+        typeid,
+      </if>
+      <if test="createrid != null" >
+        createrid,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qnid != null" >
+        #{qnid,jdbcType=INTEGER},
+      </if>
+      <if test="qnname != null" >
+        #{qnname,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="createrid != null" >
+        #{createrid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winter.model.Questionnaire" >
+    update questionnaire
+    <set >
+      <if test="qnname != null" >
+        qnname = #{qnname,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null" >
+        typeid = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="createrid != null" >
+        createrid = #{createrid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+    </set>
+    where qnid = #{qnid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winter.model.Questionnaire" >
+    update questionnaire
+    set qnname = #{qnname,jdbcType=VARCHAR},
+      typeid = #{typeid,jdbcType=INTEGER},
+      createrid = #{createrid,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE}
+    where qnid = #{qnid,jdbcType=INTEGER}
+  </update>
+</mapper>

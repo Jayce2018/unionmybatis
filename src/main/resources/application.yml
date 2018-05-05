@@ -1,0 +1,30 @@
+
+server:
+    port: 8080
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+
+#公共配置与profiles选择无关 mapperLocations指的路径是src/main/resources
+mybatis:
+  typeAliasesPackage: com.winter.model
+  mapperLocations: classpath:mapping/*.xml
+
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+
+
+  datasource:
+   # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/design
+    username: root
+    password: 123456
+    platform: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+
